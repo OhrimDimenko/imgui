@@ -8,6 +8,8 @@ file(GLOB BBRX_CMAKE_CURRENT_SOURCES
 		"${CMAKE_CURRENT_SOURCE_DIR}/*.hpp"
 		"${CMAKE_CURRENT_SOURCE_DIR}/*.hxx"
 		"${CMAKE_CURRENT_SOURCE_DIR}/*.inl"
+		"${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_sdl3.h"
+		"${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_sdl3.cpp"
 		"${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_sdlrenderer3.h"
 		"${CMAKE_CURRENT_SOURCE_DIR}/backends/imgui_impl_sdlrenderer3.cpp"
 )
@@ -18,5 +20,9 @@ target_include_directories(${LIBRARY_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
 bbrx_configure_target(${LIBRARY_NAME})
 
 message(STATUS "Added external library: ${LIBRARY_NAME}")
+
+target_link_libraries(${LIBRARY_NAME}
+		PRIVATE SDL3::SDL3
+)
 
 target_include_directories(${LIBRARY_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/External/SDL/include)
